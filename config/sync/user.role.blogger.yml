@@ -1,0 +1,23 @@
+uuid: 3b72568e-b6bf-4eaa-b4a2-e4ac089545b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.read_more
+    - node.type.blogs
+    - taxonomy.vocabulary.blog_tags
+  module:
+    - filter
+    - node
+    - taxonomy
+id: blogger
+label: Blogger
+weight: 4
+is_admin: null
+permissions:
+  - 'create blogs content'
+  - 'create terms in blog_tags'
+  - 'edit any blogs content'
+  - 'edit own blogs content'
+  - 'edit terms in blog_tags'
+  - 'use text format read_more'

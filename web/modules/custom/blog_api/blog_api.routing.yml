@@ -1,0 +1,6 @@
+blog_api.list:
+  path: '/api/blogs'
+  defaults:
+    _controller: '\Drupal\blog_api\Controller\BlogApiController::list'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_mail().
+ */
+function author_registration_mail($key, &$message, $params) {
+  $message['subject'] = $params['subject'] ?? 'Message';
+  $message['body'][] = $params['message'] ?? '';
+}
