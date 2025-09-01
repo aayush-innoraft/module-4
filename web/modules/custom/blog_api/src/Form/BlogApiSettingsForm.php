@@ -11,14 +11,14 @@ use Drupal\Core\Form\FormStateInterface;
 class BlogApiSettingsForm extends ConfigFormBase {
 
   /**
-   *
+   * Configurable settings.
    */
   protected function getEditableConfigNames(): array {
     return ['blog_api.settings'];
   }
 
   /**
-   *
+   * Gets the form ID.
    */
   public function getFormId(): string {
     return 'blog_api_settings_form';
