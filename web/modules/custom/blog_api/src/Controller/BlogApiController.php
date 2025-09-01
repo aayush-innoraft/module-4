@@ -18,13 +18,11 @@ class BlogApiController extends ControllerBase {
   public function list(Request $request): JsonResponse {
     $config = $this->config('blog_api.settings');
 
-    // Admin config filters.
     $from = $config->get('from_date');
     $to = $config->get('to_date');
     $author_ids = $config->get('author_uids') ?: [];
     $tag_ids = $config->get('tag_tids') ?: [];
 
-    // API query parameters can override admin config (optional)
     $from_param = $request->query->get('from') ?: $from;
     $to_param = $request->query->get('to') ?: $to;
     $authors_param = $request->query->get('authors')
@@ -34,7 +32,6 @@ class BlogApiController extends ControllerBase {
       ? array_map('intval', explode(',', $request->query->get('tags')))
       : $tag_ids;
 
-    // Build entity query.
     $query = \Drupal::entityQuery('node')
       ->condition('status', 1)
       ->condition('type', 'blogs')

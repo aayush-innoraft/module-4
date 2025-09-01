@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_cron().
+ */
+function blog_cleanup_cron() {
+  // Current timestamp minus 1 year.
+  $one_year_ago = strtotime('-1 year');
+
+  // Query all blogs by Guest Bloggers older than 1 year.
+  $query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
+  $nids = $query
+  // Your blog content type.
+    ->condition('type', 'blog')
+  // Published only.
+    ->condition('status', 1)
+  // Guest bloggers usually have UID 0; adjust if needed.
+    ->condition('uid', 0)
+    ->condition('created', $one_year_ago, '<')
+    ->execute();
+
+  if (!empty($nids)) {
+    $nodes = Node::loadMultiple($nids);
+    foreach ($nodes as $node) {
+      $node->delete();
+    }
+    \Drupal::logger('blog_cleanup')->notice('Deleted @count old guest blogs.', ['@count' => count($nodes)]);
+  }
+}

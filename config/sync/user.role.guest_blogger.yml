@@ -16,6 +16,7 @@ label: 'Guest Blogger'
 weight: 5
 is_admin: null
 permissions:
+  - 'access user profiles'
   - 'create blogs content'
   - 'create terms in blog_tags'
   - 'create url aliases'

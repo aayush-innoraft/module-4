@@ -1,0 +1,21 @@
+uuid: 97bab34d-0662-49df-95c3-1e7d303a5ff9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_likes
+    - node.type.blogs
+  module:
+    - like_dislike
+id: node.blogs.field_likes
+field_name: field_likes
+entity_type: node
+bundle: blogs
+label: likes
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: like_dislike

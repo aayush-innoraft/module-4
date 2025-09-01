@@ -1,0 +1,7 @@
+name: 'Blog Tools'
+type: module
+description: 'Custom block for related blogs.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - node

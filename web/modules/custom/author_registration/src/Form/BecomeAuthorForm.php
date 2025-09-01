@@ -148,7 +148,6 @@ class BecomeAuthorForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $mail = $form_state->getValue('mail');
 
-    // Check if a user already exists with this email.
     $user_storage = $this->entityTypeManager->getStorage('user');
     $users = $user_storage->loadByProperties(['mail' => $mail]);
     $account = reset($users);
@@ -169,16 +168,13 @@ class BecomeAuthorForm extends FormBase {
       'author_type' => $form_state->getValue('author_type'),
     ];
 
-    // Generate 6-digit OTP.
     $otp = random_int(100000, 999999);
     $data['otp'] = (string) $otp;
     $data['created'] = $this->time->getRequestTime();
     $data['expires'] = $data['created'] + 600;
 
-    // Store temporarily keyed by email.
     $this->tempStore->set($data['mail'], $data);
 
-    // Send OTP email.
     $params = [
       'subject' => $this->t('Your verification code'),
       'message' => $this->t('Your OTP is @otp. It expires in 10 minutes.', ['@otp' => $otp]),
@@ -191,12 +187,10 @@ class BecomeAuthorForm extends FormBase {
       $params
     );
 
-    // Notify user.
     $this->messenger()->addStatus(
       $this->t('We sent a verification code to @mail. Please check your inbox.', ['@mail' => $data['mail']])
     );
 
-    // Redirect to OTP verification form.
     $form_state->setRedirectUrl(
       Url::fromRoute('author_registration.verify', [], ['query' => ['mail' => $data['mail']]])
     );

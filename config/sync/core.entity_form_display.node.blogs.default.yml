@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.node.blogs.body
     - field.field.node.blogs.field_blog_tags
+    - field.field.node.blogs.field_likes
     - field.field.node.blogs.field_publish_date
     - node.type.blogs
   module:
     - datetime
+    - like_dislike
     - path
     - text
 id: node.blogs.default
@@ -41,6 +43,12 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_likes:
+    type: like_dislike_widget
+    weight: 124
+    region: content
+    settings: {  }
     third_party_settings: {  }
   field_publish_date:
     type: datetime_default

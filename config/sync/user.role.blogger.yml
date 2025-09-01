@@ -15,6 +15,7 @@ label: Blogger
 weight: 4
 is_admin: null
 permissions:
+  - 'access user profiles'
   - 'create blogs content'
   - 'create terms in blog_tags'
   - 'edit any blogs content'
