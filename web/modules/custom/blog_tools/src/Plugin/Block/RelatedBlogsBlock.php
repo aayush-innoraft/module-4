@@ -69,12 +69,10 @@ class RelatedBlogsBlock extends BlockBase implements ContainerFactoryPluginInter
 
     $current_node = $this->routeMatch->getParameter('node');
 
-
     if ($current_node instanceof NodeInterface && $current_node->bundle() === 'blogs') {
       $author_id = $current_node->getOwnerId();
       $current_nid = $current_node->id();
 
- 
       $query = $this->entityTypeManager->getStorage('node')->getQuery();
       $nids = $query
         ->accessCheck(TRUE)

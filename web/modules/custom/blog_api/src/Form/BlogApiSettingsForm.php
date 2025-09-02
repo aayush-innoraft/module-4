@@ -44,14 +44,14 @@ class BlogApiSettingsForm extends ConfigFormBase {
 
     $form['author_uids'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Specific Author UIDs (comma-separated)'),
+      '#title' => $this->t('Specific Author UIDs '),
       '#default_value' => implode(',', (array) $config->get('author_uids') ?: []),
       '#description' => $this->t('Enter user IDs separated by commas.'),
     ];
 
     $form['tag_tids'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Specific Tag TIDs (comma-separated)'),
+      '#title' => $this->t('Specific Tag TIDs '),
       '#default_value' => implode(',', (array) $config->get('tag_tids') ?: []),
       '#description' => $this->t('Enter taxonomy term IDs separated by commas.'),
     ];

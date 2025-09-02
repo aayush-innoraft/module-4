@@ -73,7 +73,6 @@ class VerifyOtpForm extends FormBase {
       $form_state->setErrorByName('otp', $this->t('No pending registration found. Please start again.'));
       return;
     }
-    // 10-minute expiry.
     if (\Drupal::time()->getRequestTime() - $submitted['created'] > 600) {
       $form_state->setErrorByName('otp', $this->t('Code expired. Please restart registration.'));
     }
@@ -88,26 +87,18 @@ class VerifyOtpForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $mail = $form_state->getValue('mail');
     $submitted = $this->tempStore->get($mail);
-
-    // Create user in blocked state.
     $user = User::create();
     $user->setEmail($submitted['mail']);
     $user->setUsername($submitted['mail']);
     $user->setPassword($submitted['pass']);
-    // Blocked.
     $user->set('status', 0);
-    // Create this field on User.
     $user->set('field_full_name', $submitted['full_name']);
     $user->save();
-
-    // Assign role.
     $role = $submitted['author_type'] === 'blogger' ? 'blogger' : 'guest_blogger';
     if ($user->hasField('roles')) {
       $user->addRole($role);
       $user->save();
     }
-
-    // Admin notification.
     $params_admin = [
       'subject' => $this->t('New author signup (pending approval)'),
       'message' => $this->t("Name: @n\nEmail: @e\nType: @t", [
@@ -116,18 +107,13 @@ class VerifyOtpForm extends FormBase {
         '@t' => $submitted['author_type'] === 'blogger' ? 'Blogger' : 'Guest Blogger',
       ]),
     ];
-    // Replace with your admin email.
-    $admin_mail = \Drupal::config('system.site')->get('mail') ?: 'admin@example.com';
+    $admin_mail = \Drupal::config('system.site')->get('mail') ?: 'aayush.pathak@innoraft.com';
     $this->mailManager->mail('author_registration', 'admin_notify', $admin_mail, \Drupal::languageManager()->getDefaultLanguage()->getId(), $params_admin);
-
-    // Thank-you email to user.
     $params_user = [
       'subject' => $this->t('Thank you for your submission'),
       'message' => $this->t('Thank you for your submission. We will get back to you soon.'),
     ];
     $this->mailManager->mail('author_registration', 'thanks', $submitted['mail'], \Drupal::languageManager()->getDefaultLanguage()->getId(), $params_user);
-
-    // Cleanup and message.
     $this->tempStore->delete($mail);
     $this->messenger()->addStatus($this->t('Email verified. Your account is pending admin approval.'));
     $form_state->setRedirect('<front>');
