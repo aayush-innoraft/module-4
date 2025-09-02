@@ -1,0 +1,14 @@
+blog_api.settings_form:
+  path: '/admin/config/content/blog-api'
+  defaults:
+    _form: '\Drupal\blog_api\Form\BlogApiSettingsForm'
+    _title: 'Blog API Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+blog_api.list:
+  path: '/api/blogs'
+  defaults:
+    _controller: '\Drupal\blog_api\Controller\BlogApiController::list'
+  requirements:
+    _permission: 'access content'

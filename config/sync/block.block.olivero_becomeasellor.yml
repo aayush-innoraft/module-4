@@ -1,0 +1,25 @@
+uuid: 7cc03ed4-adf9-4788-b117-cdd802e60688
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.become-a-sellor
+  module:
+    - system
+  theme:
+    - olivero
+id: olivero_becomeasellor
+theme: olivero
+region: primary_menu
+weight: 0
+provider: null
+plugin: 'system_menu_block:become-a-sellor'
+settings:
+  id: 'system_menu_block:become-a-sellor'
+  label: 'become a sellor'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

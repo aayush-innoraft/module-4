@@ -1,0 +1,17 @@
+uuid: ed1cad48-ef58-4add-88a6-eabe459fff48
+langcode: en
+status: true
+dependencies: {  }
+name: 'read more'
+format: read_more
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<br> <p> <h2> <h3> <h4> <h5> <h6> <strong> <em>'
+      filter_html_help: true
+      filter_html_nofollow: false

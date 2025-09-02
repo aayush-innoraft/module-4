@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: ijfbzDTN4CbE7Sr-6ubWzy_t1vH4OtU1doNCLssVz-4
+langcode: en
+uuid: 7fafdd3a-87c1-4047-9d2d-d528723ce2cf
+name: 'Blogging site'
+mail: aayush.pathak@innoraft.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /blogs
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+mail_notification: null

@@ -1,0 +1,15 @@
+author_registration.form:
+  path: '/become-author'
+  defaults:
+    _form: '\Drupal\author_registration\Form\BecomeAuthorForm'
+    _title: 'Become an Author'
+  requirements:
+    _permission: 'access content'
+
+author_registration.verify:
+  path: '/become-author/verify'
+  defaults:
+    _form: '\Drupal\author_registration\Form\VerifyOtpForm'
+    _title: 'Verify your email'
+  requirements:
+    _permission: 'access content'

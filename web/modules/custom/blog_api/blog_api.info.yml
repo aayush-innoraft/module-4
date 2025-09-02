@@ -1,0 +1,5 @@
+name: Blog API
+type: module
+description: JSON API for blogs with admin-set constraints.
+core_version_requirement: ^10 || ^11
+package: Custom

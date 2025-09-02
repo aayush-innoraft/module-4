@@ -1,0 +1,5 @@
+name: Author Registration
+type: module
+description: Two-step author sign-up with email OTP and admin approval.
+core_version_requirement: ^10 || ^11
+package: Custom

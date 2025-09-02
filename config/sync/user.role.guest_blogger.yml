@@ -1,0 +1,26 @@
+uuid: f57bad21-88a1-4397-851c-a2837c8b81df
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.read_more
+    - node.type.blogs
+    - taxonomy.vocabulary.blog_tags
+  module:
+    - filter
+    - node
+    - path
+    - taxonomy
+id: guest_blogger
+label: 'Guest Blogger'
+weight: 5
+is_admin: null
+permissions:
+  - 'access user profiles'
+  - 'create blogs content'
+  - 'create terms in blog_tags'
+  - 'create url aliases'
+  - 'edit any blogs content'
+  - 'edit own blogs content'
+  - 'edit terms in blog_tags'
+  - 'use text format read_more'

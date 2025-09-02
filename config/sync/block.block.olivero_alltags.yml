@@ -1,0 +1,25 @@
+uuid: c628aedb-3329-4022-95a3-892c1dec9cf4
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.all-tags
+  module:
+    - system
+  theme:
+    - olivero
+id: olivero_alltags
+theme: olivero
+region: primary_menu
+weight: 0
+provider: null
+plugin: 'system_menu_block:all-tags'
+settings:
+  id: 'system_menu_block:all-tags'
+  label: 'all tags'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }
