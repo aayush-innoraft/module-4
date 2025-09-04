@@ -1,23 +1,32 @@
 <?php
 
-/**
- * @file
- */
-
 use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
 
 /**
  * Implements hook_cron().
  */
 function blog_cleanup_cron() {
-
+  /**
+   * @var int
+   *   Storing current time minus one year.
+   *   and also storing user ids of guest bloggers.
+   */
   $one_year_ago = strtotime('-1 year');
+  $user_storage = \Drupal::entityTypeManager()->getStorage('user');
+  $uids = $user_storage->getQuery()
+    ->condition('status', 1)
+    ->condition('roles', 'guest_blogger')
+    ->execute();
 
-  $query = \Drupal::entityTypeManager()->getStorage('node')->getQuery();
-  $nids = $query
+  if (empty($uids)) {
+    return;
+  }
+  // Query all old blog nodes authored by those users.
+  $nids = \Drupal::entityTypeManager()->getStorage('node')->getQuery()
     ->condition('type', 'blogs')
     ->condition('status', 1)
-    ->condition('uid', 0)
+    ->condition('uid', $uids, 'IN')
     ->condition('created', $one_year_ago, '<')
     ->execute();
 
@@ -26,6 +35,6 @@ function blog_cleanup_cron() {
     foreach ($nodes as $node) {
       $node->delete();
     }
-    \Drupal::logger('blog_cleanup')->notice('Deleted @count old guest blogs.', ['@count' => count($nodes)]);
+    \Drupal::logger('blog_cleanup')->notice('Deleted @count old guest blogger blogs.', ['@count' => count($nodes)]);
   }
 }
