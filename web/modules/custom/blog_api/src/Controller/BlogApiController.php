@@ -22,7 +22,6 @@ class BlogApiController extends ControllerBase {
     $to = $config->get('to_date');
     $author_ids = $config->get('author_uids') ?: [];
     $tag_ids = $config->get('tag_tids') ?: [];
-
     $from_param = $request->query->get('from') ?: $from;
     $to_param = $request->query->get('to') ?: $to;
     $authors_param = $request->query->get('authors')
@@ -36,7 +35,7 @@ class BlogApiController extends ControllerBase {
       ->condition('status', 1)
       ->condition('type', 'blogs')
       ->sort('created', 'DESC')
-      ->accessCheck(FALSE);
+      ->accessCheck(TRUE);
 
     if ($from_param) {
       $query->condition('created', strtotime($from_param), '>=');

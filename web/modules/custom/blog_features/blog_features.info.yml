@@ -1,7 +1,0 @@
-name: 'Blog Features'
-type: module
-core_version_requirement: ^10
-description: 'Adds blog likes and related blogs block'
-package: Custom
-dependencies:
-  - drupal:node

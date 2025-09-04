@@ -105,13 +105,13 @@ class BecomeAuthorForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state){
     $form['full_name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Full Name'),
       '#required' => TRUE,
     ];
-
+    
     $form['mail'] = [
       '#type' => 'email',
       '#title' => $this->t('Email Address (used for login)'),
